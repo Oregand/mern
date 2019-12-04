@@ -21,7 +21,8 @@ const UserList = () => {
 
     return (
         <Wrapper>
-            <p>In this page you'll see the list of users</p>
+            {users.length === 0 && <p>No worries</p>}
+            {users.length > 0 && <table></table>}
         </Wrapper>
     )
 }
