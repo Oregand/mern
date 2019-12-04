@@ -10,7 +10,7 @@ export const updateUserById = (id, payload) => api.put(`/user/${id}`, payload)
 export const deleteUserById = id => api.delete(`/user/${id}`)
 export const getUserById = id => api.get(`/user/${id}`)
 
-const apis = {
+const API = {
     insertUser,
     getAllUsers,
     updateUserById,

@@ -24,12 +24,12 @@ const Links = () => {
                 <List>
                     <Item>
                         <Link to="/" className="nav-link">
-                            Movies
+                            Users
                         </Link>
                     </Item>
                     <Item>
                         <Link to="/create" className="nav-link">
-                            Create Movie
+                            Create User
                         </Link>
                     </Item>
                 </List>
