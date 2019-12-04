@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import UserInsert from '../pages/UserInsert'
+import UserUpdate from '../pages/UserUpdate'
+import UserList from '../pages/UserList'
+import 'bootstrap/dist/css/bootstrap.min.css'
+const Navbar = lazy(() => import('../components/Navbar'))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Suspense fallback={<div />}>
+        <Navbar />
+      </Suspense>
+      <Switch>
+        <Route path="/user/list" exact component={UserList} />
+        <Route path="/user/create" exact component={UserInsert} />
+        <Route
+            path="/user/update/:id"
+            exact
+            component={UserUpdate}
+        />
+      </Switch>
+    </Router>
   );
 }
 
