@@ -13,10 +13,10 @@ function App() {
         <Navbar />
       </Suspense>
       <Switch>
-        <Route path="/user/list" exact component={UserList} />
-        <Route path="/user/create" exact component={UserInsert} />
+        <Route path="/" exact component={UserList} />
+        <Route path="/create" exact component={UserInsert} />
         <Route
-            path="/user/update/:id"
+            path="/update/:id"
             exact
             component={UserUpdate}
         />
