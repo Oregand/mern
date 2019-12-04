@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import API from '../../api'
 import styled from 'styled-components'
@@ -16,13 +17,29 @@ const UserList = () => {
 
     useEffect(() => {
         setUsers(getUsers())
-        console.log(users)
     },  [])
 
     return (
         <Wrapper>
             {users.length === 0 && <p>No worries</p>}
-            {users.length > 0 && <table></table>}
+            {users.length > 0 && 
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map(({ name, email }) => (
+                            <tr>
+                                <td>{name}</td>
+                                <td>{email}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            }
         </Wrapper>
     )
 }
