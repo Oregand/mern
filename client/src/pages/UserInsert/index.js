@@ -42,7 +42,7 @@ const handleIncludeUser = async (payload) => {
 }
 
 const UserInsert = () => {
-    const [name, setName] = useState(''))
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
 
     return (
