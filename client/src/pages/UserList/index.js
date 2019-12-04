@@ -39,9 +39,9 @@ const UserList = () => {
     },  [])
 
     return (
-        <div>
+        <Wrapper>
             <p>In this page you'll see the list of users</p>
-        </div>
+        </Wrapper>
     )
 }
 
