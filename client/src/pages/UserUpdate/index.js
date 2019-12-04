@@ -1,77 +1,47 @@
-import React, { useState, useEffect } from 'react'
-import api from '../../api'
 
+import React, { useState, useEffect } from 'react'
+import API from '../../api'
 import styled from 'styled-components'
 
-const Title = styled.h1.attrs({
-    className: 'h1',
-})``
-
-const Wrapper = styled.div.attrs({
-    className: 'form-group',
-})`
-    margin: 0 30px;
+const Wrapper = styled.div`
+    padding: 0 40px 40px 40px;
 `
 
-const Label = styled.label`
-    margin: 5px;
-`
+const UserList = () => {
+    const [users, setUsers] = useState([])
 
-const InputText = styled.input.attrs({
-    className: 'form-control',
-})`
-    margin: 5px;
-`
-
-const Button = styled.button.attrs({
-    className: `btn btn-primary`,
-})`
-    margin: 15px 15px 15px 5px;
-`
-
-const CancelButton = styled.a.attrs({
-    className: `btn btn-danger`,
-})`
-    margin: 15px 15px 15px 5px;
-`
-
-const handleUpdateUser = async (id, payload) => {
-    await api.updateUserById(id, payload).then(res => {
-        window.alert(`User updated successfully`)
-    })
-}
-
-const UserUpdate = ({ match }) => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
+    const getUsers = async () => {
+        const result = await API.getAllUsers()
+        return result;
+    }   
 
     useEffect(() => {
-        const user = api.getUserById(match.params.id)
-
-        setName(user.data.data.name)
-        setEmail(user.data.data.email)
-    }, [])
+        setUsers(getUsers())
+    },  [])
 
     return (
         <Wrapper>
-            <Title>Create User</Title>
-            <Label>Name: </Label>
-            <InputText
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <Label>Email: </Label>
-            <InputText
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <Button onClick={handleUpdateUser(match.params.id, {name, email})}>Update User</Button>
-            <CancelButton href={'/'}>Cancel</CancelButton>
+            {users.length === 0 && <p>No worries</p>}
+            {users.length > 0 && 
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map(({ name, email }) => (
+                            <tr>
+                                <td>{name}</td>
+                                <td>{email}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            }
         </Wrapper>
     )
 }
 
-export default UserUpdate
+export default UserList
